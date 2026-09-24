@@ -131,7 +131,6 @@ export default function DepositionChecker() {
                   background: r.type === "DIRECT" ? "#fee2e2" : r.type === "INFERENTIAL" ? "#fef3c7" : "#f3f4f6",
                   padding: "2px 8px", borderRadius: 4, fontSize: 12, fontWeight: "bold"
                 }}>{r.type}</span>
-                <span style={{ fontSize: 12, color: "#666" }}>Severity: {r.severity}</span>
               </div>
               <div style={{ fontSize: 14 }}>
                 <div style={{ marginBottom: 4 }}><strong>March:</strong> "{r.claim1}"</div>
