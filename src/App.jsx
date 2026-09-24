@@ -56,31 +56,29 @@ export default function DepositionChecker() {
     setResults(null);
 
     try {
-      const res = await fetch("https://api.anthropic.com/v1/messages", {
+      const res = await fetch("/api/analyze", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          model: "claude-sonnet-4-20250514",
-          max_tokens: 1000,
-          messages: [{
-            role: "user",
-            content: `Find contradictions between these two depositions from the same witness. 
-            
-Transcript 1: ${TRANSCRIPT_1}
-
-Transcript 2: ${TRANSCRIPT_2}
-
-Return a JSON array of contradictions like: [{claim1, claim2, type, severity}]
-Types: DIRECT, INFERENTIAL, or FALSE_POSITIVE
-Severity: HIGH, MEDIUM, LOW`
-          }]
-        })
+        headers: {
+        "Content-Type": "application/json",
+        },
+          body: JSON.stringify({
+          transcript1: TRANSCRIPT_1,
+          transcript2: TRANSCRIPT_2,
+        }),
       });
 
+      if (!res.ok) {
+        throw new Error('API request failed with status ${res.status}');
+      }
+
+      
       const data = await res.json();
-      const text = data.content[0].text;
-      const parsed = JSON.parse(text.replace(/```json|```/g, "").trim());
-      setResults(parsed);
+
+      if (!Array.isArray(data.contradictions)) {
+        throw new Error("Server returned unexpected contradiction data.");
+        }
+        setResults(data.contradictions);
+    
     } catch(e) {
       setError("Failed: " + e.message);
     }
