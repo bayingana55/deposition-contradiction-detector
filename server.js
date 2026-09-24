@@ -83,18 +83,34 @@ ${transcript2}
       throw new Error("Claude response was not an array.");
     }
 
-    res.json({
-      contradictions,
-    });
+    const validTypes = ["DIRECT", "INFERENTIAL", "FALSE_POSITIVE"];
 
-  } catch (error) {
-    console.error("Claude API error:", error);
+    const isValid = contradictions.every((item) => {
+      return (
+        typeof item.claim1 === "string" &&
+        typeof item.claim2 === "string" &&
+        typeof item.reason === "string" &&
+        validTypes.includes(item.type)
+      );
+      });
+
+      if (!isValid) {
+        throw new Error("Claude returned invalid contradiction data.");
+      }
+
+      res.json({
+        contradictions,
+      });
+
+    } catch (error) {
+      console.error("Claude API error:", error);
 
     res.status(500).json({
       error: "Failed to analyze transcripts.",
     });
   }
 });
+
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
