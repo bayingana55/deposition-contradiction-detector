@@ -130,11 +130,21 @@ export default function DepositionChecker() {
                 <span style={{ 
                   background: r.type === "DIRECT" ? "#fee2e2" : r.type === "INFERENTIAL" ? "#fef3c7" : "#f3f4f6",
                   padding: "2px 8px", borderRadius: 4, fontSize: 12, fontWeight: "bold"
-                }}>{r.type}</span>
+                }}>{r.type}
+
+                </span>
+
+                <span style={{ fontSize: 12, color: "#666" }}>
+                Confidence: {r.confidence}%
+                </span>
+
               </div>
               <div style={{ fontSize: 14 }}>
                 <div style={{ marginBottom: 4 }}><strong>March:</strong> "{r.claim1}"</div>
                 <div><strong>September:</strong> "{r.claim2}"</div>
+                <div style={{ marginTop: 8, color: "#888" }}>
+                <strong>Reason:</strong> {r.reason}
+                </div>
               </div>
             </div>
           ))}
