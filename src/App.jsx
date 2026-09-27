@@ -93,13 +93,13 @@ export default function DepositionChecker() {
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 24 }}>
         <div>
           <h3>Transcript — March 2023</h3>
-          <pre style={{ background: "#f5f5f5", padding: 12, fontSize: 12, whiteSpace: "pre-wrap" }}>
+          <pre style={{ background: "#f5f5f5", color: "#000", padding: 12, fontSize: 12, whiteSpace: "pre-wrap" }}>
             {TRANSCRIPT_1}
           </pre>
         </div>
         <div>
           <h3>Transcript — September 2023</h3>
-          <pre style={{ background: "#f5f5f5", padding: 12, fontSize: 12, whiteSpace: "pre-wrap" }}>
+          <pre style={{ background: "#f5f5f5", color: "#000", padding: 12, fontSize: 12, whiteSpace: "pre-wrap" }}>
             {TRANSCRIPT_2}
           </pre>
         </div>
